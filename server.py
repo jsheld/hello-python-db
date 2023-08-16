@@ -48,5 +48,5 @@ if __name__ == '__main__':
         config.add_route('all_books', '/')
         config.add_view(all_books, route_name='all_books')
         app = config.make_wsgi_app()
-    server = make_server('0.0.0.0', PORT, app)
+    server = make_server('0.0.0.0', 8080, app)
     server.serve_forever()
