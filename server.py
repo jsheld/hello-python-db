@@ -8,17 +8,23 @@ import mysql.connector
 import os
 
 DATABASE_REGION = 'us-east-2'
-PORT = 3306
+DATABASE_HOST = os.environ['DATABASE_HOST']
+DATABASE_PORT = os.environ['DATABASE_PORT']
+DATABASE_USER = os.environ['DATABASE_USER']
+DATABASE_NAME = os.environ['DATABASE_NAME']
+DATABASE_PASSWORD = os.environ['DATABASE_PASSWORD']
+
+os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
 rds = boto3.client('rds')
 
 try:
     mydb =  mysql.connector.connect(
-        host='blogdb-instance-1.cz60hqkylf4i.us-east-2.rds.amazonaws.com' ,
-        user='admin',
-        passwd='helloworld',
-        port=3306,
-        database='bookcase',        
+        host=DATABASE_HOST,
+        user=DATABASE_USER,
+        passwd=DATABASE_PASSWORD,
+        port=DATABASE_PORT,
+        database=DATABASE_NAME,
     )
 except Exception as e:
     print('Database connection failed due to {}'.format(e))          
